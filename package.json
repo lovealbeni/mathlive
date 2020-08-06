@@ -37,8 +37,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged && bash ./scripts/pre-commit.sh",
-            "pre-push": "npm test"
+            "pre-commit": "lint-staged && bash ./scripts/pre-commit.sh"
         }
     },
     "lint-staged": {
