@@ -66,6 +66,37 @@
                 <use xlink:href="../icons.svg#angle-right" /></svg></a>
     </footer>
 
+    <script>
+        const ROWLENGTH = 10
+        const originLatexInput = `\\shortLogicalImplies \\Leftarrow \\leftrightarrow \\leftarrow \\rightarrow \\mapsto 
+ \\prime \\widehat \\overrightarrow \\overline 
+ \\neq \\leq \\geq \\approx \\pm \\mp \\equiv \\simeq
+ \\arccos \\arcsin \\arctan \\cosec \\sec \\csc \\sinh \\cosh \\tanh \\csc \\cot
+ \\& \\sup \\min \\max \\alpha \\beta \\Phi \\phi \\pi \\psi \\Psi \\sigma \\gamma \\Gamma \\kappa \\eta \\infty \\Lambda \\lambda \\mu \\Omega \\star \\tau \\varphi \\xi \\zeta \\nu \\varepsilon \\varpi
+ \\angle \\Delta \\nabla \\triangleright \\langle \\rangle
+ \\because \\therefore
+ \\square \\oslash \\otimes \\oplus \\odot \\ll \\doteq
+ \\cap \\cup \\exists \\in \\ni \\notin \\oint \\supseteq \\subseteq \\varnothing
+ \\perp \\partial \\propto ₹`
+        const genLatexKeyboard = () => {
+            const result = []
+            const latexArray = originLatexInput.split(/\s+/)
+            let itemArray = []
+            while (latexArray.length) {
+                const item = {
+                    class: 'keycap',
+                    insert: latexArray.pop()
+                }
+                itemArray.push(item)
+                if (itemArray.length === ROWLENGTH || latexArray.length == 0) {
+                    result.push(itemArray)
+                    itemArray = []
+                }
+            }
+            return result
+        }
+    </script>
+
     <script type="module">
         import MathLive from '/dist/mathlive.mjs';
 
@@ -1187,6 +1218,7 @@
             ).innerHTML = escapeHtml(mf.$text('ASCIIMath'));
         }
         let mf;
+        debugger
         if (true) {
             mf = MathLive.makeMathField('mf', {
                 // fontsDirectory: '/dist/fonts/',
@@ -1194,6 +1226,20 @@
                 smartFence: true,
                 smartMode: true,
                 virtualKeyboardMode: 'manual',
+                virtualKeyboards: 'custom-board',
+                customVirtualKeyboardLayers: {
+                    custom: {
+                        styles: '',
+                        rows: genLatexKeyboard()
+                    }
+                },
+                customVirtualKeyboards: {
+                    'custom-board': {
+                        label: 'custom',
+                        Tooltip: 'Json keyboard',
+                        layer: 'custom'
+                    }
+                },
                 onContentDidChange: (mf) => {
                     updateContent(mf)
                 },

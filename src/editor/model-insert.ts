@@ -36,6 +36,7 @@ export function insert(
     s: string,
     options: InsertOptions
 ): void {
+    debugger
     // Try to insert a smart fence.
     if (!(options.smartFence ?? false)) {
         // When smartFence is turned off, only do a "smart" fence insert

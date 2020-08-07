@@ -1433,7 +1433,7 @@ export function makeKeyboard(
         /\ball\b/i,
         'numeric functions symbols roman  greek'
     );
-
+    debugger
     const layers = {
         ...LAYERS,
         ...(mf.config.customVirtualKeyboardLayers ?? {}),
