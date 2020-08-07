@@ -1,0 +1,7 @@
+1.model-insert文件里面的181 line parseString方法，返回的是一个Atom类型的数组
+2. Token 类型就是 String
+3. tokenize 是用来把 latex => token用的
+4. parser.ts 里面的end方法（108 line）里面的endCount是防止死循环用的
+5. defineitions-utils.ts 807 line FUNCTIONS 是所有latex function 的定义（eg: cos ,sin ,tan）
+// 现在进度: defineitions-utils 807line ，拿到的symbol 是 \lbrack, 要拿到每一个token 的info
+// todo : remove test-case/index.html useless code , only remian mathfield
